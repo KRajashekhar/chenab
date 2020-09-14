@@ -5,6 +5,9 @@
 #include "connection.h"
 #include<time.h>
 
+#define STRING_SIZE 1000 
+
+
 #define SELECT_SAMPLE "SELECT * FROM esb_request WHERE status= ?" 
 
 int  select_status(char * status){
@@ -38,7 +41,8 @@ int  select_status(char * status){
    * properly established.
    */
   if (mysql_real_connect(mysql, SERVER,USER,PASSWORD,DATABASE,PORT,UNIX_SOCKET,FLAG) == NULL) {
-      finish_with_error(mysql);
+      fprintf(stderr, "Error [%d]: %s \n",mysql_errno(mysql),mysql_error(mysql));
+      mysql_close(mysql);
       return -1;
   }    
 

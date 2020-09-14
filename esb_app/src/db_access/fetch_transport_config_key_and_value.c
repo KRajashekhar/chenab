@@ -7,7 +7,7 @@
 #include "connection.h"
 
 
-#define STRING_SIZE 50
+#define STRING_SIZE 500
 
 #define SELECT_SAMPLE "SELECT config_key,config_value FROM transport_config where route_id = ?"
 
@@ -160,7 +160,7 @@ transport_config *  fetch_transport_config_key_and_value(int route_id){
 	/* Fetch all rows */
 	row_count= 0;
 	fprintf(stdout, "Fetching results ...\n");
-    transport_config  * tp = (transport_config* ) malloc(sizeof(transport_config));
+        transport_config  * tp = (transport_config* ) malloc(sizeof(transport_config));
 	if (!mysql_stmt_fetch(stmt))
 	{
 	  row_count++;
@@ -172,7 +172,7 @@ transport_config *  fetch_transport_config_key_and_value(int route_id){
 	    fprintf(stdout, " NULL\n");
 	  else
 	    fprintf(stdout, " %s\n", str_data[0]);
-	     tp->key=str_data[0];
+	     tp->config_key=str_data[0];
 
 	  /* column 2 */
 	  fprintf(stdout, "   column2 (config_value)   : ");
@@ -180,7 +180,7 @@ transport_config *  fetch_transport_config_key_and_value(int route_id){
 	    fprintf(stdout, " NULL\n");
 	  else
 	    fprintf(stdout, " %s\n", str_data[1]);
-	     tp->value=str_data[1];
+	     tp->config_value=str_data[1];
 	    
 	    /* Free the prepared result metadata */
 	   mysql_free_result(prepare_meta_result);

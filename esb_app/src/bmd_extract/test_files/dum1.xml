@@ -1,7 +1,7 @@
 <BMD>
    <Envelop>
        <!-- This is a GUID -->
-       <MessageID></MessageID>
+       <MessageID>785AAA-AAAA</MessageID>
        <!-- A message type is a unique name (string)  -->
        <MessageType></MessageType>
        <!-- Sender is identified by a GUID -->

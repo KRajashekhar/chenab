@@ -69,13 +69,13 @@ void extract_envelope_utils(xmlNode * node, bmd_envelope * bm)
                 }
                 /* MesageType*/
                 else if((strcmp(((char *) node->name),attributes[1]))==0)
-	              {
+	         {
 	                  bm->MessageType =  (char *)malloc((n+1)* sizeof(char));
                     strcpy(bm->MessageType ,(char *)xmlNodeGetContent(node));
                     if(strcmp(bm->MessageType, "") ==0){
                        bm->MessageType=NULL;  
                     }    
-	              }
+	        }
                 /* Sender*/
                 else if(strcmp(((char *) node->name), "Sender")==0)
 	              {

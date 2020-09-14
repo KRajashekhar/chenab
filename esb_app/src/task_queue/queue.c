@@ -75,7 +75,7 @@ void deQueue(task_queue* q, int k)
     task_node *prev; 
   
     // If head node itself holds the key to be deleted 
-    if (temp != NULL && temp->id == k) 
+    if (temp != NULL && temp->task_info->id == k) 
     { 
         q->front = temp->next;   // Changed head 
         free(temp);               // free old head 
@@ -84,7 +84,7 @@ void deQueue(task_queue* q, int k)
   
     // Search for the key to be deleted, keep track of the 
     // previous node as we need to change 'prev->next' 
-    while (temp != NULL && temp->id != k) 
+    while (temp != NULL && temp->task_info->id != k) 
     { 
         prev = temp; 
         temp = temp->next; 
@@ -145,7 +145,7 @@ task_node * task_queue_process(task_queue * q)
       if(!(strcmp(qn->status , "available"))){    
          qn->processing_attempts+=1;
          qn->status="processing";
-         dequeue(q);
+         deQueue(q,qn->task_info->id);
          return qn;
       }
     return NULL;

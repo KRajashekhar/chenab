@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type='text/xsl'?> 
 <BMD>
 <Envelop>
 <MessageID>B9ECAEF2-107A-4452-9553-043B6D25386E</MessageID>
@@ -14,5 +12,5 @@
 <key2>Value2</key2>
 </UserProperties>
 </Envelop>
-<Payload>001-01-1238</Payload>
+<Payload>KARB0000001</Payload>
 </BMD>

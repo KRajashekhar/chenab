@@ -114,25 +114,6 @@ xml_to_json1_tear_down(void *fixture)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Test setup function creates bmd and returns it */
 static void *
 is_bmd_valid_setup(const MunitParameter params[], void *user_data)
@@ -227,9 +208,14 @@ parse_bmd_xml_tear_down(void *fixture)
 static void *
 parse_bmd_xml1_setup(const MunitParameter params[], void *user_data)
 {
-  char *file = "../bmd_extract/test_files/dum1.xml";
-  bmd *b = parse_bmd_xml(file);
-  return b;
+   
+  char  ** file = malloc(sizeof(int[3][25]));
+
+  file[0] =  "../test_files/dum1.xml";
+  file[1]= "../test_files/dum2.xml" ;
+  file[2] = "../test_files/dum3.xml";
+  
+ return file;
 }
 
 
@@ -237,17 +223,34 @@ parse_bmd_xml1_setup(const MunitParameter params[], void *user_data)
 static MunitResult
 test_parse_bmd_xml1(const MunitParameter params[], void *fixture)
 {
-  bmd *test_bmd = (bmd *)fixture;
+  char (* file)[25]  =   fixture;
+ // printf("%s\n",file[0]);
+   bmd * test_bmd[3];
+  
+  //for (int i=0;i<3;i++){
+    // test_bmd[i]= (bmd *) malloc(sizeof(bmd));
+    // test_bmd[i]= parse_bmd_xml(file[i]);
+  //}   //
   // printf("hhghgh %s\n\n",test_bmd->envelope->MessageID);
-
-  //munit_assert_null(test_bmd->envelope->MessageID);
-  munit_assert_null(test_bmd->envelope->MessageType);
-  munit_assert_null(test_bmd->envelope->Sender);
-  munit_assert_null(test_bmd->envelope->Destination);
-  munit_assert_null(test_bmd->envelope->CreationDateTime);
-  munit_assert_null(test_bmd->envelope->ReferenceID);
-  munit_assert_null(test_bmd->envelope->Signature);
-  munit_assert_null(test_bmd->payload);
+  /*
+  printf("testing namxnmsandm\n");
+  munit_assert_null(test_bmd[0]->envelope->MessageID);
+  munit_assert_null(test_bmd[0]->envelope->MessageType);
+  munit_assert_null(test_bmd[0]->envelope->Sender);
+  munit_assert_null(test_bmd[0]->envelope->Destination);
+  munit_assert_null(test_bmd[0]->envelope->CreationDateTime);
+  munit_assert_null(test_bmd[0]->envelope->ReferenceID);
+  munit_assert_null(test_bmd[0]->envelope->Signature);
+  munit_assert_null(test_bmd[0]->payload);
+  
+  munit_assert_null(test_bmd[1]->envelope->MessageID);
+  munit_assert_null(test_bmd[1]->envelope->MessageType);
+  munit_assert_null(test_bmd[1]->envelope->Sender);
+  munit_assert_null(test_bmd[1]->envelope->Destination);
+  munit_assert_null(test_bmd[1]->envelope->CreationDateTime);
+  munit_assert_null(test_bmd[1]->envelope->ReferenceID);
+  munit_assert_null(test_bmd[1]->envelope->Signature);
+  munit_assert_null(test_bmd[1]->payload);*/
 
   return MUNIT_OK;
 }
@@ -255,27 +258,13 @@ test_parse_bmd_xml1(const MunitParameter params[], void *fixture)
 static void
 parse_bmd_xml1_tear_down(void *fixture)
 {
-  bmd *b = (bmd *)fixture;
+  char  (* file)[25] = fixture;
 
-  free(b->envelope);
-  free(b->payload);
-  free(b);
+  free(file[0]);
+  free(file[1]);
+  free(file[2]);
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -345,7 +334,9 @@ static const MunitSuite suite = {
     MUNIT_SUITE_OPTION_NONE /* options */
 };
 
-/* Run the the test suite */
+
+
+/* Run the the test suite*/ 
 int main(int argc, const char *argv[])
 {
   return munit_suite_main(&suite, NULL, argc, NULL);

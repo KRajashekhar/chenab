@@ -5,7 +5,7 @@
 #include <string.h>
 #include "../db_access/connection.h"
 
-
+/*
 int main()
 {
 
@@ -19,4 +19,4 @@ int main()
      printf("\n------%d-------\n",is_bmd_valid(bd));
                               
     return 0;
-}
+}*/

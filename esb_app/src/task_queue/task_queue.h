@@ -28,7 +28,7 @@ typedef struct Queue {
 
 static task_queue* q;
 
-void enQueue(task_queue* q, int k,int processing_attempts, char * status); 
+void enQueue(task_queue* q, task_node_info * k,int processing_attempts, char * status); 
 
 void deQueue(task_queue * q,int k);
 

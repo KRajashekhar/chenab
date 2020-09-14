@@ -135,7 +135,7 @@ int  check_id_in_transform_config(int route_id){
 	 bind[2].is_null= &is_null[2];
 	 bind[2].length= &length[2];
 	 
-	  bind[3].buffer_type= MYSQL_TYPE_STRING;
+	 bind[3].buffer_type= MYSQL_TYPE_STRING;
 	 bind[3].buffer= (char *)str_data[1];
 	 bind[3].buffer_length= STRING_SIZE;
 	 bind[3].is_null= &is_null[3];

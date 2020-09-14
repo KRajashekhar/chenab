@@ -5,10 +5,10 @@
 #include <stdbool.h>
 #include <mysql.h>
 #include "connection.h"
-#include "../task_queue/task_queue.h"
 
 
-#define STRING_SIZE 50
+
+#define STRING_SIZE 500
 
 #define SELECT_SAMPLE "SELECT id, sender_id, dest_id, message_type FROM esb_request where status = 'RECEIVED'"
 
@@ -168,9 +168,10 @@ task_node_info * select_task_info(){
 	  else
 	    fprintf(stdout, " %s\n", str_data[0]);
 	    task_node->sender=str_data[0];
-
+            fprintf(stdout, " %s\n", task_node->sender);
+           
 	  /* column 3 */
-	  fprintf(stdout, "   column3 (smallint) : ");
+	  fprintf(stdout, "   column3 (string) : ");
 	  if (is_null[2])
 	    fprintf(stdout, " NULL\n");
 	  else
@@ -178,7 +179,7 @@ task_node_info * select_task_info(){
 	    task_node->destination=str_data[1];
 
 	  /* column 4 */
-	  fprintf(stdout, "   column4 (timestamp): ");
+	  fprintf(stdout, "   column4 (STRING): ");
 	  if (is_null[3])
 	    fprintf(stdout, " NULL\n");
 	  else
@@ -221,8 +222,9 @@ task_node_info * select_task_info(){
 /*
 int main()
 {
-	task_node_info * tn= select_task_info();
-	printf("%d \n%s\n%s\n%s\n", tn->id, tn->sender,tn->destination,tn->message_type);
+	task_node_info * tn = select_task_info();
+        fprintf(stdout, " %s\n", tn->sender);
+	printf("%d\n%s\n%s\n%s\n", tn->id, tn->sender,tn->destination,tn->message_type);
 	return 0;
-}	
-*/
+}*/	
+

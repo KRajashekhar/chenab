@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "../adapter/email.h"
+#include "../adapter/adapter.h"
 
 #include "../bmd_extract/xml.h"
 
@@ -56,6 +56,7 @@ int process_esb_request(char* bmd_file_path) {
     else
     {
         // Step 3:
+                printf("BMD is valid!\n");
         status = queue_the_request(b);
        if(status==1) printf("Queued..!\n");
        else          printf("NOT queued!\n");
@@ -64,8 +65,10 @@ int process_esb_request(char* bmd_file_path) {
     return status;
 }
 
+
+/*
 int main () {
-    int status = process_esb_request("../bmd_extract/test_files/dum.xml");
+    int status = process_esb_request("../test_files/dum2.xml");
     
     if(status != 1) {
         printf("Status[%d]: Request processing failed",status);
@@ -74,4 +77,4 @@ int main () {
         printf("Status[%d]: Request processing sucess",status);
       
     return EXIT_SUCCESS;
-}
+}*/

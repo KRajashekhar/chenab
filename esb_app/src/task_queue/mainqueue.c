@@ -3,7 +3,7 @@
 #include <string.h>
 #include "task_queue.h"
 
-
+/*
 int main() 
 { 
     q = createQueue(); 
@@ -20,4 +20,4 @@ int main()
     printf("Queue Rear : %d  %d %s \n ", q->rear->id,q->rear->processing_attempts,q->rear->status); 
 
     return 0; 
-}
+}*/

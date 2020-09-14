@@ -6,7 +6,7 @@
 
 
 
-
+/*
 int main()
 {
     char * d1 = "998";
@@ -18,4 +18,4 @@ int main()
     printf("%s\n", (char *) call_function("PO svc transport", "bpavankalyan1106@gmail.com","file.txt"));
     //call_function("Credit service tranform", &d,s);
     return 0;
-}
+}*/

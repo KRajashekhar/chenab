@@ -30,19 +30,19 @@ int  is_bmd_valid(bmd  * bd)
 {
    
 
-   char * sender=bd->envelope->Sender;
-   char * destination=bd->envelope->Destination;
-   char * message_type= bd->envelope->MessageType;
+    char * sender=bd->envelope->Sender;
+    char * destination=bd->envelope->Destination;
+    char * message_type= bd->envelope->MessageType;
    
 
-
+    printf("%s\n%s\n%s\n",sender,destination,message_type);
     if(validate_xml_file(bd)){
-        int id =active_routes_from_source(sender,destination,message_type);                                 
+        int id =active_routes_from_source(sender,destination,message_type); 
+        printf("id is %d\n",id);                                
         if(id > 0 ){
              if(check_id_in_transform_config(id) >=0  &&  check_id_in_transport_config(id) >=0 ){
-              char * file = xml_to_json(bd);
-              if(find_size(file) <= MAX_SIZE)
-               return 1;
+                if(strlen(bd->payload) <= 5242880)
+                    return 1;
             } 
           }
         }     

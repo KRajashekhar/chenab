@@ -7,28 +7,28 @@
 #include "connection.h"
 
 
-#define STRING_SIZE 50
+#define STRING_SIZE 500
 
 #define SELECT_SAMPLE "SELECT config_key,config_value FROM transform_config where route_id = ?"
 
 
 transform_config *  fetch_transform_config_key_and_value(int route_id){
 
-	MYSQL_STMT    *stmt;
+    MYSQL_STMT    *stmt;
     MYSQL_BIND    input_bind[1];
     unsigned long input_length;
     int           id;
-	MYSQL_BIND    bind[2];
-	MYSQL_RES     *prepare_meta_result;
-	unsigned long length[2];
-	int           param_count, column_count, row_count;
-	short         small_data;
-	int           int_data;
-	char          str_data[2][STRING_SIZE];
-	bool          is_null[2];
+    MYSQL_BIND    bind[2];
+    MYSQL_RES     *prepare_meta_result;
+    unsigned long length[2];
+    int           param_count, column_count, row_count;
+    short         small_data;
+    int           int_data;
+    char          str_data[2][STRING_SIZE];
+    bool          is_null[2];
+		
 	
-	
-	MYSQL * mysql;
+    MYSQL * mysql;
 
     mysql = mysql_init(NULL);
          
@@ -160,7 +160,7 @@ transform_config *  fetch_transform_config_key_and_value(int route_id){
 	/* Fetch all rows */
 	row_count= 0;
 	fprintf(stdout, "Fetching results ...\n");
-    transform_config  * tf = (transform_config* ) malloc(sizeof(transform_config));
+        transform_config  * tf = (transform_config* ) malloc(sizeof(transform_config));
 	if (!mysql_stmt_fetch(stmt))
 	{
 	  row_count++;

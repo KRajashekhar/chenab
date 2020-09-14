@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <mysql.h>
 
+
+
 #define SERVER "localhost"   /*hostname*/
 #define USER  "root"       /*username*/
 #define PASSWORD    "Pavan1999@"         /*blank password this user*/
@@ -32,6 +34,15 @@ typedef struct transform_config_data
 }transform_config;
 
 
+typedef struct Qinfo { 
+    int id;
+    char * sender;
+    char * destination;
+    char * message_type;
+}task_node_info;
+
+
+
 int insert_to_esb_request(char *sender_id,char *dest_id,
 char *message_type,char *reference_id,char *message_id, 
 char *data_location, char *status,char *status_details,char *received_on);
@@ -44,7 +55,9 @@ int check_id_in_transport_config(int route_id);
  
 int select_status(char * status);
 
-int  update_esb_request(int index, char * status);
+int  update_esb_request(char * status,int index);
+
+task_node_info * select_task_info();
 
  
 
