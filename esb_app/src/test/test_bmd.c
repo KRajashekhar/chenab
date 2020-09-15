@@ -202,73 +202,107 @@ parse_bmd_xml_tear_down(void *fixture)
 }
 
 
-
-
-/* Test setup function creates bmd and returns it */
-static void *
-parse_bmd_xml1_setup(const MunitParameter params[], void *user_data)
-{
-   
-  char  ** file = malloc(sizeof(int[3][25]));
-
-  file[0] =  "../test_files/dum1.xml";
-  file[1]= "../test_files/dum2.xml" ;
-  file[2] = "../test_files/dum3.xml";
-  
- return file;
-}
-
-
-/* Test function */
 static MunitResult
-test_parse_bmd_xml1(const MunitParameter params[], void *fixture)
-{
-  char (* file)[25]  =   fixture;
- // printf("%s\n",file[0]);
-   bmd * test_bmd[3];
-  
-  //for (int i=0;i<3;i++){
-    // test_bmd[i]= (bmd *) malloc(sizeof(bmd));
-    // test_bmd[i]= parse_bmd_xml(file[i]);
-  //}   //
-  // printf("hhghgh %s\n\n",test_bmd->envelope->MessageID);
-  /*
-  printf("testing namxnmsandm\n");
-  munit_assert_null(test_bmd[0]->envelope->MessageID);
-  munit_assert_null(test_bmd[0]->envelope->MessageType);
-  munit_assert_null(test_bmd[0]->envelope->Sender);
-  munit_assert_null(test_bmd[0]->envelope->Destination);
-  munit_assert_null(test_bmd[0]->envelope->CreationDateTime);
-  munit_assert_null(test_bmd[0]->envelope->ReferenceID);
-  munit_assert_null(test_bmd[0]->envelope->Signature);
-  munit_assert_null(test_bmd[0]->payload);
-  
-  munit_assert_null(test_bmd[1]->envelope->MessageID);
-  munit_assert_null(test_bmd[1]->envelope->MessageType);
-  munit_assert_null(test_bmd[1]->envelope->Sender);
-  munit_assert_null(test_bmd[1]->envelope->Destination);
-  munit_assert_null(test_bmd[1]->envelope->CreationDateTime);
-  munit_assert_null(test_bmd[1]->envelope->ReferenceID);
-  munit_assert_null(test_bmd[1]->envelope->Signature);
-  munit_assert_null(test_bmd[1]->payload);*/
+test_parameters(const MunitParameter params[], void* user_data) {
+  const char* foo;
+  const char* bar;
 
+  (void) user_data;
+
+  /* The "foo" parameter is specified as one of the following values:
+   * "one", "two", or "three". */
+  foo = munit_parameters_get(params, "foo");
+  /* Similarly, "bar" is one of "four", "five", or "six". */
+//  bar = munit_parameters_get(params, "bar");
+  /* "baz" is a bit more complicated.  We don't actually specify a
+   * list of valid values, so by default NULL is passed.  However, the
+   * CLI will accept any value.  This is a good way to have a value
+   * that is usually selected randomly by the test, but can be
+   * overridden on the command line if desired. */
+  /* const char* baz = munit_parameters_get(params, "baz"); */
+
+  /* Notice that we're returning MUNIT_FAIL instead of writing an
+   * error message.  Error messages are generally preferable, since
+   * they make it easier to diagnose the issue, but this is an
+   * option.
+   *
+   * Possible values are:
+   *  - MUNIT_OK: Sucess
+   *  - MUNIT_FAIL: Failure
+   *  - MUNIT_SKIP: The test was skipped; usually this happens when a
+   *    particular feature isn't in use.  For example, if you're
+   *    writing a test which uses a Wayland-only feature, but your
+   *    application is running on X11.
+   *  - MUNIT_ERROR: The test failed, but not because of anything you
+   *    wanted to test.  For example, maybe your test downloads a
+   *    remote resource and tries to parse it, but the network was
+   *    down.
+   */
+  
+  printf("%s\n",(char *) foo);
+
+  /*if (strcmp(foo, "../test_files/dum1.xml") == 0 ||
+      strcmp(foo, "../test_files/dum2.xml") == 0 ||
+      strcmp(foo, "../test_files/dum3.xml") == 0)
+    return MUNIT_OK;*/
+
+    bmd *test_bmd= parse_bmd_xml(foo);
+
+  printf("testing namxnmsandm\n");
+  printf("%s\n" ,test_bmd->envelope->MessageID);
+
+  if(strcmp(foo,"../test_files/dum1.xml")==0)
+  {
+    munit_assert_string_equal(test_bmd->envelope->MessageID,"A9ECAEF2-107A-4452-9553-043B6D25386E");
+    munit_assert_string_equal(test_bmd->envelope->MessageType,"CreditReport");
+    munit_assert_string_equal(test_bmd->envelope->Sender,"756E2EAA-1D5B-4BC0-ACC4-4CEB669408DA");
+    munit_assert_string_equal(test_bmd->envelope->Destination,"6393F82F-4687-433D-AA23-1966330381FE");
+    munit_assert_string_equal(test_bmd->envelope->CreationDateTime,"2020-08-12T05:18:00+0000");
+    munit_assert_string_equal(test_bmd->envelope->ReferenceID,"INV-PROFILE-889712");
+    munit_assert_string_equal(test_bmd->envelope->Signature,"63f5f61f7a79301f715433f8f3689390d1f5da4f855169023300491c00b8113c");
+    munit_assert_string_equal(test_bmd->payload,"001-01-1234");
+  }  
+
+  if(strcmp(foo,"../test_files/dum2.xml")==0)
+  {
+    munit_assert_string_equal(test_bmd->envelope->MessageID,"B9ECAEF2-107A-4452-9553-043B6D25386E");
+    munit_assert_string_equal(test_bmd->envelope->MessageType,"CreditReport");
+    munit_assert_string_equal(test_bmd->envelope->Sender,"756E2EAA-1D5B-4BC0-ACC4-4CEB669408DB");
+    munit_assert_string_equal(test_bmd->envelope->Destination,"6393F82F-4687-433D-AA23-1966330381FE");
+    munit_assert_string_equal(test_bmd->envelope->CreationDateTime,"2020-08-12T05:19:00+0000");
+    munit_assert_string_equal(test_bmd->envelope->ReferenceID,"INV-PROFILE-889712");
+    munit_assert_string_equal(test_bmd->envelope->Signature,"63f5f61f7a79301f715433f8f3689390d1f5da4f855169023300491c00b8113c");
+    munit_assert_string_equal(test_bmd->payload,"KARB0000001");
+  }  
+
+
+
+  if(strcmp(foo,"../test_files/dum3.xml")==0)
+  {
+    munit_assert_string_equal(test_bmd->envelope->MessageID,"C9ECAEF2-107A-4452-9553-043B6D25386E");
+    munit_assert_string_equal(test_bmd->envelope->MessageType,"CreditReport");
+    munit_assert_string_equal(test_bmd->envelope->Sender,"756E2EAA-1D5B-4BC0-ACC4-4CEB669408DC");
+    munit_assert_string_equal(test_bmd->envelope->Destination,"6393F82F-4687-433D-AA23-1966330381FE");
+    munit_assert_string_equal(test_bmd->envelope->CreationDateTime,"2020-08-12T05:19:00+0000");
+    munit_assert_string_equal(test_bmd->envelope->ReferenceID,"INV-PROFILE-889712");
+    munit_assert_string_equal(test_bmd->envelope->Signature,"63f5f61f7a79301f715433f8f3689390d1f5da4f855169023300491c00b8113c");
+    munit_assert_string_equal(test_bmd->payload,"001-01-1239");
+  }  
+
+
+  
   return MUNIT_OK;
 }
 
-static void
-parse_bmd_xml1_tear_down(void *fixture)
-{
-  char  (* file)[25] = fixture;
-
-  free(file[0]);
-  free(file[1]);
-  free(file[2]);
-
-}
 
 
+static char* foo_params[] = {
+  (char*) "../test_files/dum1.xml" , (char*) "../test_files/dum2.xml", (char*) "../test_files/dum3.xml", NULL
+};
 
-
+static MunitParameterEnum test_params[] = {
+  { (char*) "foo", foo_params },
+};
 
 
 /* Put all unit tests here. */
@@ -283,14 +317,6 @@ MunitTest bmd_tests[] = {
     },
 
 
-     {
-        "/parse_bmd_xml1_test",   /* name */
-        test_parse_bmd_xml1,      /* test function */
-        parse_bmd_xml1_setup,     /* setup function for the test */
-        parse_bmd_xml1_tear_down, /* tear_down */
-        MUNIT_TEST_OPTION_NONE,  /* options */
-        NULL                     /* parameters */
-    },
 
     {
         "/is_bmd_valid_test",   /* name */
@@ -320,6 +346,7 @@ MunitTest bmd_tests[] = {
 
     },
 
+    { (char*) "/example/parameters", test_parameters, NULL, NULL, MUNIT_TEST_OPTION_NONE, test_params },
 
     /* Mark the end of the array with an entry where the test
    * function is NULL */
