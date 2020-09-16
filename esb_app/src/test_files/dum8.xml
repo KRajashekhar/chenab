@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl'?> 
+<BMD>
+<Envelop>
+<MessageID>dum_eight_msg</MessageID>
+<MessageType>CreditReport</MessageType>
+<Sender>eighth_client</Sender>
+<Destination>eighth_Destiny</Destination>
+<CreationDateTime>2020-09-16T01:33:00+0000</CreationDateTime>
+<Signature>eighth_client_sign</Signature>
+<ReferenceID>INV-PROFILE-889718</ReferenceID>
+<UserProperties>
+<key1>Value1</key1>
+<key2>Value2</key2>
+</UserProperties>
+</Envelop>
+<Payload>001-01-1238</Payload>
+</BMD>

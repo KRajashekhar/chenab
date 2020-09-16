@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl'?> 
+<BMD>
+<Envelop>
+<MessageID>dum_five_msg</MessageID>
+<MessageType>CreditReport</MessageType>
+<Sender>fifth_client</Sender>
+<Destination>fifth_Destiny</Destination>
+<CreationDateTime>2020-09-15T05:23:00+0000</CreationDateTime>
+<Signature>fifth_client_sign</Signature>
+<ReferenceID>INV-PROFILE-889715</ReferenceID>
+<UserProperties>
+<key1>Value1</key1>
+<key2>Value2</key2>
+</UserProperties>
+</Envelop>
+<Payload>001-01-1235</Payload>
+</BMD>
