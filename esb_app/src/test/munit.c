@@ -2048,8 +2048,11 @@ munit_suite_main_custom(const MunitSuite* suite, void* user_data,
   return result;
 }
 
+/*
+
 int
 munit_suite_main(const MunitSuite* suite, void* user_data,
                  int argc, char* const argv[MUNIT_ARRAY_PARAM(argc + 1)]) {
   return munit_suite_main_custom(suite, user_data, argc, argv, NULL);
 }
+*/

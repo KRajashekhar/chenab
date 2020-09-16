@@ -14,8 +14,12 @@ int main()
     int d =998;
     char * s1="https://ifsc.razorpay.com/";
     char * s2= "KARB0000001";
-    printf("%s\n", (char *) call_function("PO svc tranform", s1,s2));
-    printf("%s\n", (char *) call_function("PO svc transport", "bpavankalyan1106@gmail.com","file.txt"));
-    //call_function("Credit service tranform", &d,s);
+    char * file_name = (char *) call_function("APIURL", s1,s2);
+    printf("%s\n", file_name);
+    char * file =  (char *) call_function("convert_to_json",file_name,s2);
+    printf("%s\n", file);
+    printf("%s\n", (char *) call_function("email", "bpavankalyan1106@gmail.com",file));
+    remove(file);
+    free(file_name);
     return 0;
 }*/

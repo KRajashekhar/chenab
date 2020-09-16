@@ -7,8 +7,6 @@
 #ifndef CONNECTION_H
 #define CONNECTION_H
 
-#include <stdio.h>
-#include <mysql.h>
 
 
 
@@ -39,6 +37,7 @@ typedef struct Qinfo {
     char * sender;
     char * destination;
     char * message_type;
+    char * data_location;
 }task_node_info;
 
 
@@ -47,7 +46,7 @@ int insert_to_esb_request(char *sender_id,char *dest_id,
 char *message_type,char *reference_id,char *message_id, 
 char *data_location, char *status,char *status_details,char *received_on);
 
-int active_routes_from_source(char *sender,char* destination,char *message_type);
+int active_routes_from_source(char *sender,char * destination,char * message_type);
 
 int check_id_in_transform_config(int route_id);
 
@@ -57,7 +56,13 @@ int select_status(char * status);
 
 int  update_esb_request(char * status,int index);
 
-task_node_info * select_task_info();
+task_node_info * select_task_info(void);
+
+transform_config *  fetch_transform_config_key_and_value(int route_id);
+
+transport_config *  fetch_transport_config_key_and_value(int route_id);
+
+
 
  
 

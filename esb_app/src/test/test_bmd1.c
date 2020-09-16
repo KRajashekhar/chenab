@@ -569,8 +569,9 @@ static const MunitSuite suite = {
 
 
 
-/* Run the the test suite*/ 
+/* Run the the test suite
 int main(int argc, const char *argv[])
 {
   return munit_suite_main(&suite, NULL, argc, NULL);
 }
+*/

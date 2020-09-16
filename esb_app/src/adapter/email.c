@@ -9,7 +9,7 @@
 
 
 #define FROM "Testmailchenab1@gmail.com"
-#define CC "bpavankalyan1106@gmail.com"
+#define CC   "Testmailchenab1@gmail.com"
 
 struct upload_status
 {
@@ -24,12 +24,16 @@ void *  transport_email(void* ptr,void * ptr1)
 { 
    
    printf("email----\n");
-   char * to =  (char *) malloc((strlen(ptr)+1)* sizeof(char)) ;
-   to = (char *) ptr;
-   char * file_path = (char *) malloc((strlen(ptr1)+1)* sizeof(char));
-   file_path = (char *) ptr1;
+  // char * to =  (char *) malloc((strlen(ptr)+1)* sizeof(char)) ;
+   //to = (char *) ptr;
+   //char * file_path = (char *) malloc((strlen(ptr1)+1)* sizeof(char));
+   //file_path = (char *) ptr1;
 
+   char* to = (char *) ptr;
+   char * file_path= (char *) ptr1;
     printf("Sending to %s\n", to);
+    printf("file is  %s\n", file_path);
+
 
     CURL *curl;
     CURLcode res = CURLE_OK;
@@ -83,6 +87,8 @@ void *  transport_email(void* ptr,void * ptr1)
         /* Always cleanup */
         curl_easy_cleanup(curl);
     }
+    
+    remove(file_path);
 
    
  return  "yes";

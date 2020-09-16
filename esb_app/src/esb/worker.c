@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "esb.h"
+#include "../adapter/adapter.h"
+#include <string.h>
 // #include "../task_queue/task_queue.h"
 #include "../db_access/connection.h"
+#include "../bmd_extract/xml.h"
 
 
 task_node_info *  fetch_new_request_from_db()
@@ -30,8 +33,8 @@ void *poll_database_for_new_requests(void *vargp)
 {
     // Step 1: Open a DB connection
     int i = 0;
-  //  while (i < 99)
-   // {
+   while (i < 99)
+   {
         i++;
         /**
          * Step 2: Query the esb_requests table to see if there
@@ -41,7 +44,7 @@ void *poll_database_for_new_requests(void *vargp)
         /**
          * Step 3:
          */
-        if ((tn=fetch_new_request_from_db(tn))!=NULL)
+        if ((tn=fetch_new_request_from_db())!=NULL)
         {
             /**
               * Found a new request, so we will now process it.
@@ -64,27 +67,59 @@ void *poll_database_for_new_requests(void *vargp)
                     fprintf(stderr,"cannot update status in esb\n");
                     return NULL;
                }
+
+               int id = active_routes_from_source(tn->sender,tn->destination,tn->message_type);
+               printf("id is %d \n",id);
                
                printf("Applying transformation and transporting steps.\n");
-               transport_config * tp = fetch_transport_config_key_and_value(tn->id);
-               transform_config * tf = fetch_transform_config_key_and_value(tn->id);
-                         
-               if(tp && tf ){
+               transport_config * tp = fetch_transport_config_key_and_value(id);
+	       transform_config * tf= fetch_transform_config_key_and_value(id);
                
-                /** 
-                 * TODO:  Transforming and transporting steps using adapter
-                 *
-                 */
-               
+               printf("data->location is %s\n ",tn->data_location);
+
+               bmd * bd1 = parse_bmd_xml(((char *)tn->data_location));
+
+
+               char * transform_file_name  ; 
+
+               printf("%s\n%s\n-----\n%s\n%s\n",tf->config_key,tf->config_value,tp->config_key,tp->config_value);  
+             
+
+                     
+	       
+
+                
+
+                if((tp!=NULL) && ((strcmp(tf->config_value,"string"))==0))
+                {           
+                  char * content = call_function(tp->config_key,tp->config_value,bd1->payload);
+                  printf("content is \n %s\n",content);
+                  char * file_name =  (char *) call_function("convert_to_json",content,bd1->payload);
+                  printf("%s\n",file_name);
+                  if((strcmp(((char *)call_function("email","Testmailchenab1@gmail.com",file_name)) ,"yes"))==0){
+                     printf("sent the json file of destination service\n");
+                      if(update_esb_request("DONE",tn->id) == -1){
+                    fprintf(stderr,"cannot update status in esb\n");
+                    return NULL;
+               }}
+                     
+                  else
+                     printf("email cannot sent\n");         
                }
-              
+                
+                else{
+	           printf("not entered\n");
+                  transform_file_name = call_function(tf->config_key,bd1->payload,tf->config_value);
+                  call_function(tp->config_key,tp->config_value,transform_file_name);  
+               }
+
 
         }
         /**
          * Sleep for polling interval duration, say, 5 second.
          * DO NOT hard code it here!
          */
-        //printf("Sleeping for 5 seconds.\n");
-      //  sleep(5);
-   // }
+        printf("Sleeping for 5 seconds.\n");
+        sleep(5);
+   }
 }

@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include "munit.h"
 #include "stdlib.h"
-#include "munit.c"
+//#include "munit.c"
 #include "../bmd_extract/xml.h"
 
 
@@ -181,7 +181,7 @@ test_parameters(const MunitParameter params[], void* user_data) {
     munit_assert_string_equal(test_bmd->envelope->CreationDateTime,"2020-08-12T05:18:00+0000");
     munit_assert_string_equal(test_bmd->envelope->ReferenceID,"INV-PROFILE-889712");
     munit_assert_string_equal(test_bmd->envelope->Signature,"63f5f61f7a79301f715433f8f3689390d1f5da4f855169023300491c00b8113c");
-    munit_assert_string_equal(test_bmd->payload,"001-01-1234");
+    munit_assert_string_equal(test_bmd->payload,"KARB0000001");
   }  
 
   if(strcmp(foo,"../test_files/dum2.xml")==0)
@@ -547,12 +547,13 @@ static const MunitSuite test_suite = {
  * always mean success and failure).  I guess my point is that nothing
  * about µnit requires it. */
 #include <stdlib.h>
-
+/*
 int main(int argc, char* argv) {
   /* Finally, we'll actually run our test suite!  That second argumen
 t
    * is the user_data parameter which will be passed either to the
-   * test or (if provided) the fixture setup function. */
+   * test or (if provided) the fixture setup function. 
   return munit_suite_main(&test_suite, (void*) "µnit", argc, NULL);
 }
 
+*/

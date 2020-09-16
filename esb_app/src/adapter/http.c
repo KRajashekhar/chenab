@@ -37,10 +37,8 @@ writecallback(void *contents, size_t size, size_t nmemb, void *userp)
 
 void *  tranport_to_ifsc_razorpay(void* ptr,void * ptr1)
  { 
-    printf("yewe\n");
     char * s =  (char *) malloc((strlen(ptr)+strlen(ptr1)+1) * sizeof(char)); 
-    strcat(s,ptr);
-    strcat(s,ptr1);
+    sprintf(s,"%s%s",((char *)ptr),((char*) ptr1));
     printf("Transformation for PO service: %s  : %s : %s \n", ((char*)ptr), ((char *)ptr1), s);
 
     CURL *curl;
@@ -76,7 +74,7 @@ void *  tranport_to_ifsc_razorpay(void* ptr,void * ptr1)
                 curl_easy_strerror(res));
                 return NULL;
     }
-    else {
+   // else {
         /*
         * Now, our chunk.memory points to a memory block that is chunk.size
         * bytes big and contains the remote file.
@@ -84,19 +82,20 @@ void *  tranport_to_ifsc_razorpay(void* ptr,void * ptr1)
         * Do something nice with it!
         */
 
-        printf("%lu bytes retrieved\n", (unsigned long)chunk.size);
-            printf("%s \n", chunk.memory);
+        //printf("%lu bytes retrieved\n", (unsigned long)chunk.size);
+          printf("%s \n", chunk.memory);
 
-    }
+  //s  }
 
     /* cleanup curl stuff */
     curl_easy_cleanup(curl);
+    //free(s);
 
-    free(chunk.memory);
+   // free(chunk.memory);
 
     /* we're done with libcurl, so clean it up */
     curl_global_cleanup();
 
-    return "yes";
+    return chunk.memory;
 
 }

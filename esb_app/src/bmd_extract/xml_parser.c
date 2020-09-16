@@ -149,6 +149,7 @@ bmd_envelope * extract_envelope(char * filepath)
 
   extract_envelope_utils(root_element,bm);
 
+
    /*free the document */
     xmlFreeDoc(doc);
 
@@ -170,15 +171,21 @@ bmd_envelope * extract_envelope(char * filepath)
 
 bmd * parse_bmd_xml(char * filepath)
 {
+   printf("XML PARSING\n");
    bmd  * bd = (bmd*) malloc (sizeof(bmd));
    bd->envelope=  extract_envelope(filepath);
    bd->payload= extract_payload(filepath);
+   printf("bhjxcbbazczj\n");
    return bd;
 }
 
 
+
+
 char * extract_payload(char * filepath)
 {
+
+
   xmlDoc *doc = NULL;
   xmlNode *root_element = NULL;
   char * Payload;
@@ -194,16 +201,22 @@ char * extract_payload(char * filepath)
   xmlNode * node = root_element -> children;
   while(node)
   {
+
     if(node->type == XML_ELEMENT_NODE)
     {
       if(is_leaf(node))
       {
-        n= strlen((char*) xmlNodeGetContent(node));
+
         if ((strcmp(((char *) node->name),"Payload"))==0)
 	      {
-            Payload = (char *)malloc((n+1)* sizeof(char));
+	              n= strlen((char*) xmlNodeGetContent(node));
+	          printf("payload length is  %d\n",n);
+            Payload = (char *)malloc((n+2)* sizeof(char));
+            printf("%s\n", (char *) xmlNodeGetContent(node));
+           // Payload =  (char *) xmlNodeGetContent(node);
             strcpy(Payload , (char *) xmlNodeGetContent(node));
-            if(strcmp(Payload, "") ==0){
+            	          printf("payload %s\n",Payload);
+            if(n==0){
                 Payload=NULL;  
             } 
             return Payload;
@@ -221,7 +234,7 @@ char * extract_payload(char * filepath)
   *have been allocated by the parser.
   */
   xmlCleanupParser();
-
+  printf("yesssss\n");
   return NULL;     
 }
 

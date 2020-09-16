@@ -172,7 +172,7 @@ transport_config *  fetch_transport_config_key_and_value(int route_id){
 	    fprintf(stdout, " NULL\n");
 	  else
 	    fprintf(stdout, " %s\n", str_data[0]);
-	     tp->config_key=str_data[0];
+	     tp->config_key=strdup(str_data[0]);
 
 	  /* column 2 */
 	  fprintf(stdout, "   column2 (config_value)   : ");
@@ -180,7 +180,7 @@ transport_config *  fetch_transport_config_key_and_value(int route_id){
 	    fprintf(stdout, " NULL\n");
 	  else
 	    fprintf(stdout, " %s\n", str_data[1]);
-	     tp->config_value=str_data[1];
+	     tp->config_value=strdup(str_data[1]);
 	    
 	    /* Free the prepared result metadata */
 	   mysql_free_result(prepare_meta_result);
@@ -220,7 +220,7 @@ int main()
     int id=15;
 	transport_config * tp= fetch_transport_config_key_and_value(id);
     if(tp!=NULL)
-	    printf("%s \n%s\n", tp->key,tp->value);
+	    printf("%s \n%s\n", tp->config_key,tp->config_value);
     else
     {
         printf("NO such type of route_id like %d\n", id);

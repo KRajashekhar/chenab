@@ -26,8 +26,9 @@ const static struct
     const char *name;
     void *  (*func)(void*, void *);
 } function_map[] = {
-    {"PO svc tranform",tranport_to_ifsc_razorpay},
-    {"PO svc transport", transport_email},
+    {"APIURL",tranport_to_ifsc_razorpay},
+    {"email", transport_email},
+    {"convert_to_json",convert_to_json},
     {"Credit service tranform", tranform_bmd_Credit_svc},
     {"Credit service transport", transport_bmd_Credit_svc}
 };
@@ -40,7 +41,6 @@ char * call_function(const char *name, void* data ,void * data1)
         if (!strcmp(function_map[i].name, name) && function_map[i].func)
         {
             return function_map[i].func(data,data1);
-            return 0;
         }
     }
     return "NO";

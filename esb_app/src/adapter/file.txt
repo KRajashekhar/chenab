@@ -1,7 +1,0 @@
-
-
-sa: email.c simp.c http.c link.h
-	gcc -o sa main.c email.c simp.c http.c link.h -lcurl
-
-clean:
-	rm sa

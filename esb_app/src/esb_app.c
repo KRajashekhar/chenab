@@ -35,8 +35,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/time.h>
-#include "../bmd_extract/xml.h"
-#include "esb.h"
+#include "../esb/esb.h"
 #include <time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -45,7 +44,7 @@
 
 //#define PATH_MAX 500
 
-extern void *poll_database_for_new_requests(void *);
+extern void * poll_database_for_new_requests(void * vargp);
 
 /**
  * Define a suitable struct for holding the endpoint request handling result.
@@ -96,47 +95,43 @@ Creates a directory in the given path and
 returns 0 if successfully created.
 */
 
-static int mkdir_p(const char *path)
+static int mkdir_p(const char *path)  
 {
-	const size_t len = strlen(path);
-	char _path[PATH_MAX];
-	char *p;
+    /* Adapted from http://stackoverflow.com/a/2336245/119527 */
+    const size_t len = strlen(path);
+    char _path[PATH_MAX];
+    char *p; 
 
-	errno = 0;
+    errno = 0;
 
-	/* Copy string so its mutable */
-	if (len > sizeof(_path) - 1)
-	{
-		errno = ENAMETOOLONG;
-		return -1;
-	}
-	strcpy(_path, path);
+    /* Copy string so its mutable */
+    if (len > sizeof(_path)-1) {
+        errno = ENAMETOOLONG;
+        return -1; 
+    }   
+    strcpy(_path, path);
 
-	/* Iterate the string */
-	for (p = _path + 1; *p; p++)
-	{
-		if (*p == '/')
-		{
-			/* Temporarily truncate */
-			*p = '\0';
+    /* Iterate the string */
+    for (p = _path + 1; *p; p++) {
+        if (*p == '/') {
+            /* Temporarily truncate */
+            *p = '\0';
 
-			if (mkdir(_path, S_IRWXU) != 0)
-			{
-				if (errno != EEXIST)
-					return -1;
-			}
+            if (mkdir(_path, S_IRWXU) != 0) {
+                if (errno != EEXIST)
+                    return -1; 
+            }
 
-			*p = '/';
-		}
-	}
+            *p = '/';
+        }
+    }   
 
-	if (mkdir(_path, S_IRWXU) != 0)
-	{
-		if (errno != EEXIST)
-			return -1;
-	}
+    if (mkdir(_path, S_IRWXU) != 0) {
+        if (errno != EEXIST)
+            return -1; 
+    }   
 
-	return 0;
+    return 0;
 }
 /*
 A unique path is created by extracting the date time 
@@ -152,21 +147,22 @@ static char *create_work_dir_for_request()
 	 */
 
 	char *temp_path = malloc(PATH_MAX * sizeof(char));
-	time_t now = time(NULL) % 1000;
+	time_t now = time(NULL);
 	srand(now);
-	int t = rand()%100;
+	int t=rand();
 	char cwd[100];
-	getcwd(cwd, sizeof(cwd));
-	sprintf(temp_path, "%s/bmd_files/%ld_%d", cwd, now, t);
-
-	int ret = mkdir_p(temp_path);
-	if (ret != 0 && errno == EEXIST)
+	getcwd(cwd,sizeof(cwd));
+	sprintf(temp_path,"%s/bmd_files/%ld_%d",cwd,now,t);
+	    
+	int ret=mkdir_p(temp_path);
+	if(ret!=0 && errno==EEXIST)
 	{
-		sprintf(temp_path, "%s_%d", temp_path, rand());
+		sprintf(temp_path,"%s_%d",temp_path,rand());
 		mkdir_p(temp_path);
 	}
-	printf("Cuurent Working Directory %s \n ", cwd);
-
+    printf("Cuurent Working Directory %s \n ",cwd);
+    
+	
 	//strcpy(temp_path, "./bmd_files/1234");
 	kore_log(LOG_INFO, "Temporary work folder: %s", temp_path);
 	return temp_path;
@@ -208,7 +204,7 @@ save_bmd(struct http_request *req)
 	char bmd_file_path[PATH_MAX];
 	char *req_folder = create_work_dir_for_request();
 	sprintf(bmd_file_path, "%s/%s", req_folder, file->filename);
-	printf("File Path :  %s \n", bmd_file_path);
+    printf("File Path :  %s \n",bmd_file_path);
 	fd = open(bmd_file_path, O_CREAT | O_TRUNC | O_WRONLY, 0700);
 	if (fd == -1)
 	{
@@ -286,8 +282,7 @@ cleanup:
 	return ep_res;
 }
 
-//Needed to terminate the polling thread.
-
+//Needed to terminate the polling thread
 pthread_t thread_id;
 void kore_parent_configure(int argc, char *argv[])
 {
@@ -305,6 +300,3 @@ void kore_parent_teardown(void)
 	 */
 	pthread_cancel(thread_id);
 }
-
-   
-

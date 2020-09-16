@@ -172,7 +172,7 @@ transform_config *  fetch_transform_config_key_and_value(int route_id){
 	    fprintf(stdout, " NULL\n");
 	  else
 	    fprintf(stdout, " %s\n", str_data[0]);
-	    tf->config_key=str_data[0];
+	    tf->config_key=strdup(str_data[0]);
 
 	  /* column 2 */
 	  fprintf(stdout, "   column2 (config_value)   : ");
@@ -180,7 +180,7 @@ transform_config *  fetch_transform_config_key_and_value(int route_id){
 	    fprintf(stdout, " NULL\n");
 	  else
 	    fprintf(stdout, " %s\n", str_data[1]);
-	    tf->config_value=str_data[1];
+	    tf->config_value=strdup(str_data[1]);
 	    
 	    /* Free the prepared result metadata */
 	   mysql_free_result(prepare_meta_result);
@@ -219,8 +219,11 @@ int main()
 {
     int id=15;
 	transform_config * tf= fetch_transform_config_key_and_value(id);
+	if((strcmp(tf->config_value ,""))==0)
+	    printf("csbdcbsjdbcjsdbcjbs\n");
     if(tf!=NULL)
 	    printf("%s \n%s\n", tf->config_key,tf->config_value);
+	    
     else
     {
         printf("NO such type of route_id like %d\n", id);

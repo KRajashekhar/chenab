@@ -32,6 +32,7 @@ int active_routes_from_source (char * sender,char * destination,char * message_t
  char          str_data[2][STRING_SIZE];
 
 
+printf("------\n%s\n%s\n%s\n--------\n", sender,destination,message_type);
 
 
  MYSQL *mysql = mysql_init(NULL);

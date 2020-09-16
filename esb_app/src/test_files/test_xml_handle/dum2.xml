@@ -3,7 +3,7 @@
 <BMD>
 <Envelop>
 <MessageID>A9ECAEF2-107A-4452-9553-043B6D25386E</MessageID>
-<MessageType>CreditReport</MessageType>
+<MessageType></MessageType>
 <Sender>756E2EAA-1D5B-4BC0-ACC4-4CEB669408DA</Sender>
 <Destination>6393F82F-4687-433D-AA23-1966330381FE</Destination>
 <CreationDateTime>2020-08-12T05:18:00+0000</CreationDateTime>
@@ -14,5 +14,5 @@
 <key2>Value2</key2>
 </UserProperties>
 </Envelop>
-<Payload>KARB0000001</Payload>
+<Payload>001-01-1234</Payload>
 </BMD>
