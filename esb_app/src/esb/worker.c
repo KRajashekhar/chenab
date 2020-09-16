@@ -41,6 +41,10 @@ void *poll_database_for_new_requests(void *vargp)
          * are any newly received BMD requets.
          */
         task_node_info * tn;
+        char * content;
+        char * transform_file_name; 
+        char * file_name;
+        
         /**
          * Step 3:
          */
@@ -59,8 +63,6 @@ void *poll_database_for_new_requests(void *vargp)
               *    of this step.
               * 5. Cleanup
               */
-              
-              printf("yesss\n\n");
               printf("%d\n",tn->id);
               
                if(update_esb_request("PROCESSING",tn->id) == -1){
@@ -80,37 +82,45 @@ void *poll_database_for_new_requests(void *vargp)
                bmd * bd1 = parse_bmd_xml(((char *)tn->data_location));
 
 
-               char * transform_file_name  ; 
 
-               printf("%s\n%s\n-----\n%s\n%s\n",tf->config_key,tf->config_value,tp->config_key,tp->config_value);  
-             
 
-                     
-	       
-
-                
-
-                if((tp!=NULL) && ((strcmp(tf->config_value,"string"))==0))
-                {           
-                  char * content = call_function(tp->config_key,tp->config_value,bd1->payload);
+               printf("%s\n%s\n-----\n%s\n%s\n",tf->config_key,tf->config_value,tp->config_key,tp->config_value);         
+               if((tp!=NULL) && ((strcmp(tf->config_value,"string"))==0))
+               {           
+                  content = call_function(tp->config_key,tp->config_value,bd1->payload);
                   printf("content is \n %s\n",content);
-                  char * file_name =  (char *) call_function("convert_to_json",content,bd1->payload);
+                  file_name =  (char *) call_function("convert_to_json",content,bd1->payload);
                   printf("%s\n",file_name);
                   if((strcmp(((char *)call_function("email","Testmailchenab1@gmail.com",file_name)) ,"yes"))==0){
                      printf("sent the json file of destination service\n");
                       if(update_esb_request("DONE",tn->id) == -1){
-                    fprintf(stderr,"cannot update status in esb\n");
-                    return NULL;
-               }}
+                        fprintf(stderr,"cannot update status in esb\n");
+                        return NULL;
+                  }
+               }
                      
                   else
                      printf("email cannot sent\n");         
                }
                 
                 else{
-	           printf("not entered\n");
+	          printf("WITH TRANSFORMATION\n");
                   transform_file_name = call_function(tf->config_key,bd1->payload,tf->config_value);
-                  call_function(tp->config_key,tp->config_value,transform_file_name);  
+                  call_function(tp->config_key,tp->config_value,transform_file_name); 
+                  content = call_function(tp->config_key,tp->config_value,bd1->payload);
+                  printf("content is \n %s\n",content);
+                  file_name =  (char *) call_function("convert_to_json",content,bd1->payload);
+                  printf("%s\n",file_name);
+                  if((strcmp(((char *)call_function("email","Testmailchenab1@gmail.com",file_name)) ,"yes"))==0){
+                     printf("sent the json file of destination service\n");
+                      if(update_esb_request("DONE",tn->id) == -1){
+                        fprintf(stderr,"cannot update status in esb\n");
+                        return NULL;
+                  }
+               }
+                     
+                  else
+                     printf("email cannot sent\n");   
                }
 
 
