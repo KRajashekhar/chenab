@@ -32,31 +32,31 @@ task_node_info * select_task_info(void){
 	
 	MYSQL * mysql;
 
-    mysql = mysql_init(NULL);
+       mysql = mysql_init(NULL);
          
-    if (mysql == NULL) {
-       fprintf(stderr, "mysql_init() failed\n");
-       return NULL;
-    }  
-  
-    if (mysql_real_connect(mysql, SERVER,USER,PASSWORD,DATABASE,PORT,UNIX_SOCKET,FLAG) == NULL) {
+        if (mysql == NULL) {
+           fprintf(stderr, "mysql_init() failed\n");
+           return NULL;
+        }  
+   
+       if (mysql_real_connect(mysql, SERVER,USER,PASSWORD,DATABASE,PORT,UNIX_SOCKET,FLAG) == NULL) {
 	    fprintf(stderr, "Error [%d]: %s \n",mysql_errno(mysql),mysql_error(mysql));
 	    mysql_close(mysql);
 	    return NULL;
-    }  
+       }  
         
 	/* Prepare a SELECT query to fetch data from test_table */
 	stmt = mysql_stmt_init(mysql);
 	if (!stmt)
 	{
 	  fprintf(stderr, " mysql_stmt_init(), out of memory\n");
-	    return NULL;
+	  return NULL;
 	}
 	if (mysql_stmt_prepare(stmt, SELECT_SAMPLE, strlen(SELECT_SAMPLE)))
 	{
 	  fprintf(stderr, " mysql_stmt_prepare(), SELECT failed\n");
 	  fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
-	    return NULL;
+	  return NULL;
 	}
 	fprintf(stdout, " prepare, SELECT successful\n");
 

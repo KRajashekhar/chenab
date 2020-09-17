@@ -14,35 +14,35 @@
 
 transform_config *  fetch_transform_config_key_and_value(int route_id){
 
-    MYSQL_STMT    *stmt;
-    MYSQL_BIND    input_bind[1];
-    unsigned long input_length;
-    int           id;
-    MYSQL_BIND    bind[2];
-    MYSQL_RES     *prepare_meta_result;
-    unsigned long length[2];
-    int           param_count, column_count, row_count;
-    short         small_data;
-    int           int_data;
-    char          str_data[2][STRING_SIZE];
-    bool          is_null[2];
+	    MYSQL_STMT    *stmt;
+	    MYSQL_BIND    input_bind[1];
+	    unsigned long input_length;
+	    int           id;
+	    MYSQL_BIND    bind[2];
+	    MYSQL_RES     *prepare_meta_result;
+	    unsigned long length[2];
+	    int           param_count, column_count, row_count;
+	    short         small_data;
+	    int           int_data;
+	    char          str_data[2][STRING_SIZE];
+	    bool          is_null[2];
+			
 		
-	
-    MYSQL * mysql;
+	    MYSQL * mysql;
 
-    mysql = mysql_init(NULL);
-         
-    if (mysql == NULL) {
-        fprintf(stderr, "mysql_init() failed\n");
-	    return NULL;
-    }  
-  
-    if (mysql_real_connect(mysql, SERVER,USER,PASSWORD,DATABASE,PORT,UNIX_SOCKET,FLAG) == NULL) {
-	    fprintf(stderr, "Error [%d]: %s \n",mysql_errno(mysql),mysql_error(mysql));
-	    mysql_close(mysql);
-	    return NULL;
-    }  
-        
+	    mysql = mysql_init(NULL);
+		 
+	    if (mysql == NULL) {
+		fprintf(stderr, "mysql_init() failed\n");
+		    return NULL;
+	    }  
+	  
+	    if (mysql_real_connect(mysql, SERVER,USER,PASSWORD,DATABASE,PORT,UNIX_SOCKET,FLAG) == NULL) {
+		    fprintf(stderr, "Error [%d]: %s \n",mysql_errno(mysql),mysql_error(mysql));
+		    mysql_close(mysql);
+		    return NULL;
+	    }  
+		
 	/* Prepare a SELECT query to fetch data from test_table */
 	stmt = mysql_stmt_init(mysql);
 	if (!stmt)
@@ -132,7 +132,7 @@ transform_config *  fetch_transform_config_key_and_value(int route_id){
 	bind[0].length= &length[0];
 
 	/* config_value COLUMN */
-    bind[1].buffer_type= MYSQL_TYPE_STRING;
+       bind[1].buffer_type= MYSQL_TYPE_STRING;
 	bind[1].buffer= (char *)str_data[1];
 	bind[1].buffer_length= STRING_SIZE;
 	bind[1].is_null= &is_null[1];
