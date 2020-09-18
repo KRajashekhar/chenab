@@ -42,13 +42,37 @@ someuser@OX:~/temp/esb_proj/esb_app$ tree
 └── src    <--------------- Your code lives under here
     ├── adapter
     │   ├── email.c
-    │   └── email.h
-    │   └── (Other adapters)
+    │   ├── adapter.h
+    |   ├── dynamic_lookup.c
+    |   ├── http.c
+    |   ├── convert_to_json.c
+    │   └── http_post.c
+    |
+    ├── db_access   <-------- db access functions (c functions interacting database)
+    |   ├── connection.h 
+    |   ├── insert_esb_request.c
+    |   ├── select_status.c
+    |   ├── select_task_info.c
+    |   ├── fetch_transport_config_key_and_value.c
+    |   ├── fetch_tranform_config_key_and_value.c
+    |   ├── check_id_tranform_config.c
+    |   ├── check_id_tranport_config.c
+    |   └── select_active_route_id.c
+    |
+    ├── bmd_extract  <---------- extracting and handling bmd xml messages.
+    |   ├── xml_handle.c
+    |   ├── validate_bmd_request.c
+    |   └── xml.h
+    |  
     ├── esb
     │   ├── esb.c
     │   ├── esb.h
-    │   └── test_esb.c  <-------- Contains the uni tests for esb.c
+    │   └── worker.c
+    |    
     ├── esb_app.c
+    ├── test_files
+    |   
+    |
     └── test  <--------- We have kept the munit files in a common folder.
         ├── munit.c
         └── munit.h
