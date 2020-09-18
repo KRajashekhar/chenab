@@ -20,6 +20,7 @@ Following instructions assume that you are working on an Ubuntu machine, and are
 1. Install Kore Web framework as [described here](https://docs.kore.io/3.3.1/install.html). You will use it to write an HTTP endpoint for receiving the requests for the ESB.
 NOTE: A skeleton is provided to get you started. However, you are strongly encouraged to go through the [Kore's simple guide](https://docs.kore.io/3.3.1/).
 
+
 ### Source code layout
 
 To make it easy working with Kore build, you can use the following suggested layout for your code in the repository.
