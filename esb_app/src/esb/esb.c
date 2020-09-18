@@ -60,21 +60,12 @@ int queue_the_request(bmd *b,char * file_path) {
 int process_esb_request(char* bmd_file_path) {
     int status = 1; // 1 => OK, -ve => Errors
     printf("Handling the BMD %s\n", bmd_file_path);
-    /** TODO: 
-     * Perform the steps outlined in the Theory of Operation section of
-     * the ESB specs document. Each major step should be implemented in
-     * a separate module. Suitable unit tests should be created for all
-     * the modules, including this one.
-     */
-    // Step 1:
+    
     bmd *b = parse_bmd_xml(bmd_file_path);
-    /** defined in bmd_assets module*/
 
-    // Step 2:
     /** defined in bmd_extract module*/
     if (is_bmd_valid(b)!=1)
     {
-        //TODO: Process the error case
         printf("BMD is invalid!\n");
         status = -2;
     }

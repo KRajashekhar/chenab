@@ -8,6 +8,9 @@ void *  transport_email(void* ptr,void * ptr1) ;
 void *  tranform_bmd_Credit_svc(void* ptr,void * ptr1);
 void *  transport_bmd_Credit_svc(void* ptr,void * ptr1);
 void *  convert_to_json(void* payload, void * name);
+void *  ftp_upload(void *asptr, void *fileptr);
+void * remove_file(void* ptr,void * ptr1) ;
+
 
 
 #endif

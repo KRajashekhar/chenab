@@ -69,13 +69,13 @@ void extract_envelope_utils(xmlNode * node, bmd_envelope * bm)
                 }
                 /* MesageType*/
                 else if((strcmp(((char *) node->name),attributes[1]))==0)
-	         {
+	              {
 	                  bm->MessageType =  (char *)malloc((n+1)* sizeof(char));
                     strcpy(bm->MessageType ,(char *)xmlNodeGetContent(node));
                     if(strcmp(bm->MessageType, "") ==0){
                        bm->MessageType=NULL;  
                     }    
-	        }
+	              }
                 /* Sender*/
                 else if(strcmp(((char *) node->name), "Sender")==0)
 	              {
@@ -84,7 +84,7 @@ void extract_envelope_utils(xmlNode * node, bmd_envelope * bm)
                    if(strcmp(bm->Sender, "") ==0){
                        bm->Sender=NULL;  
                     } 
-	            	 }
+	            	}
                  /* Destination*/
                 else if((strcmp(((char *) node->name),attributes[3]))==0)
                 {
@@ -97,13 +97,13 @@ void extract_envelope_utils(xmlNode * node, bmd_envelope * bm)
                 /* CreationDateTime*/
                 else if((strcmp(((char *) node->name),attributes[4]))==0)
 	              {
-                  printf("yes\n");
+                   printf("yes\n");
 		               bm->CreationDateTime =  (char *)malloc((n+1)* sizeof(char));
                    strcpy(bm->CreationDateTime ,(char *)xmlNodeGetContent(node));
                    if(strcmp(bm->CreationDateTime, "") ==0){
                        bm->CreationDateTime=NULL;  
                     } 
-	               }
+	              }
                  /* Signature*/
 	              else  if((strcmp(((char *) node->name),attributes[5]))==0)
             	  {

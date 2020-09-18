@@ -283,12 +283,16 @@ cleanup:
 }
 
 //Needed to terminate the polling thread
-pthread_t thread_id;
+pthread_t thread_id,thread_id1;
 void kore_parent_configure(int argc, char *argv[])
 {
 	printf("\n%%%%%%%%%% kore_parent_configure\n");
 	// TODO: Start a new thread for task polling
-	pthread_create(&thread_id, NULL, poll_database_for_new_requests, NULL);
+	char * name ="1";
+	char * names = "2";
+	pthread_create(&thread_id, NULL, poll_database_for_new_requests, name);
+	sleep(10);
+	pthread_create(&thread_id1, NULL, poll_database_for_new_requests, names);
 }
 
 void kore_parent_teardown(void)
@@ -299,4 +303,5 @@ void kore_parent_teardown(void)
 	 * Instead of killing it, ask the thread to terminate itself.
 	 */
 	pthread_cancel(thread_id);
+	pthread_cancel(thread_id1);
 }

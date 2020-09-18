@@ -11,14 +11,11 @@
  */
 
 
+void * remove_file(void* ptr,void * ptr1) { 
+    remove(((char *)ptr));
+    return "YES"; 
+   }
 
-
-
-
-void * tranform_bmd_Credit_svc(void* ptr,void * ptr1) { printf("Transformation for Credit service: %d : %s \n", *((int*)ptr), ((char *)ptr1));
-   return "YES"; }
-void * transport_bmd_Credit_svc(void* ptr,void * ptr1) { printf("Transport for Credit service %d : %s \n",*((int*)ptr), ((char *)ptr1));
-   return "YES"; }
 
 /* The ESB would have this table */
 const static struct
@@ -29,8 +26,9 @@ const static struct
     {"APIURL",tranport_to_ifsc_razorpay},
     {"email", transport_email},
     {"convert_to_json",convert_to_json},
-    {"Credit service tranform", tranform_bmd_Credit_svc},
-    {"Credit service transport", transport_bmd_Credit_svc}
+    {"remove", remove_file},
+    {"ftp", ftp_upload},
+
 };
 
 /* This is how the ESB may dynamically invoke the service adapter functions */

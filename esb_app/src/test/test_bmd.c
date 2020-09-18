@@ -85,7 +85,7 @@ test_xml_values(const MunitParameter params[], void* user_data) {
     munit_assert_string_equal(test_bmd->envelope->CreationDateTime,"2020-08-12T05:19:00+0000");
     munit_assert_string_equal(test_bmd->envelope->ReferenceID,"INV-PROFILE-889712");
     munit_assert_string_equal(test_bmd->envelope->Signature,"63f5f61f7a79301f715433f8f3689390d1f5da4f855169023300491c00b8113c");
-    munit_assert_string_equal(test_bmd->payload,"KARB0000001");
+    munit_assert_string_equal(test_bmd->payload,"HDFC0CAGSBK");
   }  
 
 
@@ -268,7 +268,7 @@ test_xml_valid(const MunitParameter params[], void* user_data) {
  
   if(strcmp(foo,"../test_files/test_xml_handle/dum.xml")==0)
   {
-    munit_assert_int(validate_xml_file(test_bmd),==,1);   
+    munit_assert_int(validate_xml_file(test_bmd),==,-1);   
   }  
 
   if(strcmp(foo,"../test_files/test_xml_handle/dum1.xml")==0)
@@ -438,7 +438,7 @@ static const MunitSuite test_suite = {
  * always mean success and failure).  I guess my point is that nothing
  * about µnit requires it. */
 #include <stdlib.h>
-#if 0
+#if 1
 int main(int argc, char** argv) {
   /* Finally, we'll actually run our test suite!  That second argument
    * is the user_data parameter which will be passed either to the

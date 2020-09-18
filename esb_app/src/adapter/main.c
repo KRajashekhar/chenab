@@ -18,8 +18,13 @@ int main()
     printf("%s\n", file_name);
     char * file =  (char *) call_function("convert_to_json",file_name,s2);
     printf("%s\n", file);
-    printf("%s\n", (char *) call_function("email", "bpavankalyan1106@gmail.com",file));
-    remove(file);
+    printf("%s\n", (char *) call_function("email", "Testmailchenab1@gmail.com",file));
+    printf("%s\n", (char *) call_function("ftp", "test",file));
+
+    printf("%s\n", (char *) call_function("remove",file ,NULL));
+
+    //remove(file);
     free(file_name);
     return 0;
-}*/
+}
+*/

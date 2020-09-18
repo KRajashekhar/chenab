@@ -8,7 +8,7 @@ DB_ACCESS1 = ../db_access/select_status.c ../db_access/fetch_transform_config_ke
 XML_HANDLER = ../bmd_extract/xml_parser.c ../bmd_extract/validate_bmd_request.c
 INCLUDE = `mysql_config --cflags --libs` `xml2-config --cflags` `xml2-config --libs`
 test: ${DB_ACCESS} ${XML_HANDLER}
-	gcc  ${DB_ACCESS} ${DB_ACCESS1} ${XML_HANDLER} test_bmd.c -o test ../esb/esb.c ${INCLUDE} 
+	gcc  ${DB_ACCESS} ${DB_ACCESS1} ${XML_HANDLER} test_bmd.c -o test ../esb/esb.c ${INCLUDE}  munit.c
 
 
 

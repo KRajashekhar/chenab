@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <curl/curl.h>
 
+#if 0
 int main(void)
 {
   CURL *curl;
@@ -35,3 +36,4 @@ int main(void)
   curl_global_cleanup();
   return 0;
 }
+#endif

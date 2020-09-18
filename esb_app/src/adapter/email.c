@@ -88,7 +88,7 @@ void *  transport_email(void* ptr,void * ptr1)
         curl_easy_cleanup(curl);
     }
     
-    remove(file_path);
+    //remove(file_path);
 
    
  return  "yes";
