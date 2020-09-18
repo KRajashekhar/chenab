@@ -19,6 +19,10 @@ Following instructions assume that you are working on an Ubuntu machine, and are
 1. You will be writing unit tests for all your C code using [munit](https://nemequ.github.io/munit/#getting-started).
 1. Install Kore Web framework as [described here](https://docs.kore.io/3.3.1/install.html). You will use it to write an HTTP endpoint for receiving the requests for the ESB.
 NOTE: A skeleton is provided to get you started. However, you are strongly encouraged to go through the [Kore's simple guide](https://docs.kore.io/3.3.1/).
+1. Install [curl](https://www.cyberciti.biz/faq/how-to-install-curl-command-on-a-ubuntu-linux/) inorder to send data using various protocols. (FTP, SMTP,HTTP used in this project)
+1. Install [libxml2](https://askubuntu.com/questions/733169/how-to-install-libxml2-in-ubuntu-15-10), XML library for parsing xml document.
+1. Install [Mysql server](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04) inorder to store therecords.
+1. Install [FTP server](https://linuxconfig.org/how-to-setup-ftp-server-on-ubuntu-20-04-focal-fossa-linux) for storing the output of destination service.
 
 
 ### Source code layout
