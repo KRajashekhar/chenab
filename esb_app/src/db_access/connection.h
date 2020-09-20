@@ -12,7 +12,7 @@
 
 #define SERVER "localhost"   /*hostname*/
 #define USER  "root"       /*username*/
-#define PASSWORD    "Pavan1999@"         /*blank password this user*/
+#define PASSWORD    "prabhakars 589b"         /*blank password this user*/
 #define DATABASE "esb_db"   /*name of the database*/
 #define PORT  3306         /*port number*/
 #define UNIX_SOCKET NULL   /*unix socket*/
