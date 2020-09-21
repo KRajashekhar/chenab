@@ -37,3 +37,10 @@ void * convert_to_json(void  * payload, void * name)
       name */
     return strdup(file);
 }
+/*
+int main()
+{
+	convert_to_json("001-01-1234","first");
+	return 0;
+	}
+	*/
