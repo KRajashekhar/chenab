@@ -15,7 +15,7 @@
 
 //#define file "./somefile.txt"
 #define UPLOAD_FILE_AS "file.txt"
-#define REMOTE_URL "ftp://127.0.0.1/"
+#define REMOTE_URL "sftp://127.0.0.1/"
 
 #define STRING_SIZE 100
 /* NOTE: if you want this example to work on Windows with libcurl as a
@@ -95,7 +95,7 @@ void *ftp_upload(void *asptr, void *fileptr)
                          (curl_off_t)fsize);
 
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-        curl_easy_setopt(curl, CURLOPT_USERPWD, "chenab:chenab");
+        curl_easy_setopt(curl, CURLOPT_USERPWD, "sftpuser:prabhakars 589b");
         curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
         /* Now run off and do what you've been told! */
         res = curl_easy_perform(curl);
