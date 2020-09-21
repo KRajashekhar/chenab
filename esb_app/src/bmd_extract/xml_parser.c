@@ -300,7 +300,7 @@ long int find_size(char  * file_name)
 
 
 
-
+/*
 int main()
 {
 
@@ -312,5 +312,6 @@ int main()
     printf("%s",xml_to_json(bd));
     return 0;
 }
+*/
 
 
