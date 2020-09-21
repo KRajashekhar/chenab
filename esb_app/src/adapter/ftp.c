@@ -118,11 +118,11 @@ void *ftp_upload(void *asptr, void *fileptr)
     curl_global_cleanup();
     return "YES";
 }
-/*
+
 int main()
 {
-    sftp_upload("file.txt", "file.txt");
+    ftp_upload("file.txt", "file.txt");
     return 0;
 }
 
-    */
+

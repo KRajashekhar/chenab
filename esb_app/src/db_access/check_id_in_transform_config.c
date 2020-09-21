@@ -211,12 +211,12 @@ int  check_id_in_transform_config(int route_id){
 	}
 
 
-	/*
-	int main(int argc, char **argv) {
+	
+	/*int main(int argc, char **argv) {
 	   int route_id=15;
 	   check_id_in_transport_config(route_id)?printf("yes\n"):printf("NO\n");
 	   return 0;
-	}   */
+	} */  
 
 
 

@@ -299,12 +299,12 @@ long int find_size(char  * file_name)
 
 
 
-/*
+
 
 int main()
 {
 
-    char  filepath[50] = "/home/bpavan/bmd_extract/dum1.xml";
+    char  filepath[100] = "Home/Desktop/git_enviornment_1.0/chenab/chenab/esb_app/src/bmd_extract/dum.xml";
     bmd  * bd = (bmd*) malloc (sizeof(bmd));
     bd= parse_bmd_xml(filepath);
   //  validate_xml_file(bd)? printf("1"): printf("2");
@@ -313,5 +313,4 @@ int main()
     return 0;
 }
 
-*/
 

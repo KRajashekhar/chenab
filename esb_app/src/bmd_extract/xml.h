@@ -36,8 +36,8 @@ long int find_size(char * file_name);
 int is_bmd_valid(bmd* bd); 
 void  insert (bmd * bd);
 
-
-/*char * attributes[7] =  {
+/*
+char * attributes[7] =  {
     "MessageID",
     "MessageType",
     "Sender",
@@ -45,7 +45,8 @@ void  insert (bmd * bd);
     "CreationDateTime",
     "Signature",
     "ReferenceID"
-};*/
+};
  
+ */
 
  #endif

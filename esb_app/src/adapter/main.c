@@ -6,7 +6,7 @@
 
 
 
-/*
+
 int main()
 {
     char * d1 = "998";
@@ -27,4 +27,4 @@ int main()
     free(file_name);
     return 0;
 }
-*/
+

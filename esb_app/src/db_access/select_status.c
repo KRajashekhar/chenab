@@ -289,12 +289,13 @@ int  select_status(char * status){
 
 /*
 int main(int argc, char **argv) {
-   char * status="wewww";
+   char * status="available";
    select_status(status);
    return 0;
-}   
+} 
+*/  
 
-*/
+
 
 
   

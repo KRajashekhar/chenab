@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include <mysql.h>
+#include <mysql/mysql.h>
 #include "connection.h"
 
 
@@ -151,4 +151,5 @@ int main(int argc, char **argv) {
     int id=1;
     update_esb_request(status,id);
     return 0;
-} */
+} 
+*/

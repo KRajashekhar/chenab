@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include <mysql.h>
+#include <mysql/mysql.h>
 #include "connection.h"
 
 
@@ -236,8 +236,8 @@ task_node_info * select_task_info(void){
 	return NULL;
 }	
 
-/*
 
+/*
 int main()
 {
 	task_node_info * tn = select_task_info();
@@ -247,3 +247,4 @@ int main()
 	return 0;
 }
 */
+

@@ -5,11 +5,10 @@
 #include <string.h>
 #include "../db_access/connection.h"
 
-/*
 int main()
 {
 
-    char  * filepath= "/home/bpavan/nho_work/chenab/esb_app/src/bmd_extract/dum.xml";
+    char  * filepath= "../test_files/dum1.xml";
     bmd  * bd = (bmd*) malloc (sizeof(bmd));
     bd = parse_bmd_xml(filepath);
     printf("%s",bd->envelope->CreationDateTime);
@@ -19,4 +18,4 @@ int main()
      printf("\n------%d-------\n",is_bmd_valid(bd));
                               
     return 0;
-}*/
+}
