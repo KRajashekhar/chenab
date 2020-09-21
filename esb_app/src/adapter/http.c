@@ -38,7 +38,7 @@ writecallback(void *contents, size_t size, size_t nmemb, void *userp)
 void *  tranport_to_ifsc_razorpay(void* ptr,void * ptr1)
  { 
     char * s =  (char *) malloc((strlen(ptr)+strlen(ptr1)+1) * sizeof(char)); 
-    sprintf(s,"%s%s",((char *)ptr),((char*) ptr1));
+    sprintf(s,"%s%s",((char *)ptr),((char w*) ptr1));
     printf("Transformation for PO service: %s  : %s : %s \n", ((char*)ptr), ((char *)ptr1), s);
 
     CURL *curl;
