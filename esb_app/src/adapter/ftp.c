@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "adapter.h"
 #include <curl/curl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -13,9 +12,8 @@
 #include <unistd.h>
 #endif
 
-//#define file "./somefile.txt"
-#define UPLOAD_FILE_AS "file.txt"
-#define REMOTE_URL "ftp://127.0.0.1/"
+//#define UPLOAD_FILE_AS "Payload.json"
+#define REMOTE_URL "sftp://127.0.0.1/sftpuser/sftp-test/"
 
 #define STRING_SIZE 100
 /* NOTE: if you want this example to work on Windows with libcurl as a
@@ -77,17 +75,13 @@ void *ftp_upload(void *asptr, void *fileptr)
 
         /* Create unique target based on type */
         char url[STRING_SIZE];
-        sprintf(url, "%s%s.json", REMOTE_URL, as);
+        strcpy(url, REMOTE_URL);
+        strcat(url, as);
         /* specify target */
         curl_easy_setopt(curl, CURLOPT_URL, url);
 
-        /* pass in that last of FTP commands to run after the transfer */
-        // curl_easy_setopt(curl, CURLOPT_POSTQUOTE, headerlist);
-
         /* now specify which file to upload */
         curl_easy_setopt(curl, CURLOPT_READDATA, fp);
-        
-       
 
         /* Set the size of the file to upload   If you give a *_LARGE
        option you MUST make sure that the type of the passed-in argument is a
@@ -99,8 +93,6 @@ void *ftp_upload(void *asptr, void *fileptr)
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
         curl_easy_setopt(curl, CURLOPT_USERPWD, "sftpuser:prabhakars 589b");
         curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-         //following line disable passive mode
-        curl_easy_setopt(curl,CURLOPT_FTPPORT,"-");
         /* Now run off and do what you've been told! */
         res = curl_easy_perform(curl);
         /* Check for errors */
@@ -111,7 +103,7 @@ void *ftp_upload(void *asptr, void *fileptr)
             return "NO";
         }
 
-        /* clean up the FTP commands list */
+        /* clean up the SFTP commands list */
         curl_slist_free_all(headerlist);
 
         /* always cleanup */
@@ -123,10 +115,8 @@ void *ftp_upload(void *asptr, void *fileptr)
     return "YES";
 }
 
-int main()
+/*int main()
 {
-    ftp_upload("file.txt", "file.txt");
+    sftp_upload(UPLOAD_FILE_AS, "Payload.json");
     return 0;
-}
-
-
+}*/

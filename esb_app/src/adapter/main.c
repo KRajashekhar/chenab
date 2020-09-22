@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <curl/curl.h>
 #include "adapter.h"
-
-
+//#include "sftp.c"
+//#include "email.c"
 
 
 int main()
@@ -21,9 +21,12 @@ int main()
     printf("%s\n", (char *) call_function("email", "Testmailchenab1@gmail.com",file));
     printf("%s\n", (char *) call_function("ftp", "test",file));
 
-    printf("%s\n", (char *) call_function("remove",file ,NULL));
+   printf("%s\n", (char *) call_function("remove",file ,NULL));
+   // transport_email("email", "Testmailchenab1@gmail.com");
+   
+  //  sftp_upload("Payload.json", "Payload.json");
 
-    //remove(file);
+    remove(file);
     free(file_name);
     return 0;
 }
