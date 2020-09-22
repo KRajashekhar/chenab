@@ -15,7 +15,7 @@
 
 //#define file "./somefile.txt"
 #define UPLOAD_FILE_AS "file.txt"
-#define REMOTE_URL "sftp://127.0.0.1/"
+#define REMOTE_URL "ftp://127.0.0.1/"
 
 #define STRING_SIZE 100
 /* NOTE: if you want this example to work on Windows with libcurl as a
@@ -86,6 +86,8 @@ void *ftp_upload(void *asptr, void *fileptr)
 
         /* now specify which file to upload */
         curl_easy_setopt(curl, CURLOPT_READDATA, fp);
+        
+       
 
         /* Set the size of the file to upload   If you give a *_LARGE
        option you MUST make sure that the type of the passed-in argument is a
@@ -97,6 +99,8 @@ void *ftp_upload(void *asptr, void *fileptr)
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
         curl_easy_setopt(curl, CURLOPT_USERPWD, "sftpuser:prabhakars 589b");
         curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+         //following line disable passive mode
+        curl_easy_setopt(curl,CURLOPT_FTPPORT,"-");
         /* Now run off and do what you've been told! */
         res = curl_easy_perform(curl);
         /* Check for errors */
@@ -118,10 +122,11 @@ void *ftp_upload(void *asptr, void *fileptr)
     curl_global_cleanup();
     return "YES";
 }
-/*
+
 int main()
 {
     ftp_upload("file.txt", "file.txt");
     return 0;
 }
-*/
+
+
