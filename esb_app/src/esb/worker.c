@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "esb.h"
+/*
 #include "../adapter/adapter.h"
 #include "../adapter/dynamic_lookup.c"
 #include "../adapter/email.c"
@@ -9,18 +10,21 @@
 #include "../adapter/http.c"
 #include "../adapter/main.c"
 #include "../db_access/fetch_transform_config_key_and_value.c"
-#include "../db_access/fetch_transport_config_key_and_value.c"
+#include "../db_access/fetch_transport_config_key_and_value.c"*/
 #include <string.h>
 #include <stdlib.h>
 #include <pthread.h>
+/*
 #include "../db_access/select_task_info.c"
 #include "../db_access/update_esb_request.c"
 #include "../bmd_extract/xml_parser.c"
 #include "../db_access/select_active_route_id.c"
 //#include "../task_queue/task_queue.h"
+*/
 #include "../db_access/connection.h"
-#include "../bmd_extract/xml.h"
-#include "cleanup.c"
+//#include "../bmd_extract/xml.h"
+#include "../adapter/adapter.h"
+//#include "cleanup.c"
 
 
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
@@ -162,3 +166,4 @@ void *poll_database_for_new_requests(void *vargp)
 
    }
 }
+

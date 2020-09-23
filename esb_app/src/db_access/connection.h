@@ -58,6 +58,10 @@ int  update_esb_request(char * status,int index);
 
 task_node_info * select_task_info(void);
 
+int active_routes_from_source(char *sender,char * destination, char * message_type);
+
+char * call_function(const char *name, void* data ,void * data1);
+
 transform_config *  fetch_transform_config_key_and_value(int route_id);
 
 transport_config *  fetch_transport_config_key_and_value(int route_id);
