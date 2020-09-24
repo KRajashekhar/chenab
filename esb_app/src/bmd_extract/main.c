@@ -4,7 +4,7 @@
 #include "xml.h"
 #include <string.h>
 #include "../db_access/connection.h"
-
+/*
 int main()
 {
 
@@ -19,3 +19,4 @@ int main()
                               
     return 0;
 }
+*/
