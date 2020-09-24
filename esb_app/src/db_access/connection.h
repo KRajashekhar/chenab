@@ -1,4 +1,5 @@
-/**
+/*
+ *
  * @brief Parameters required for 
  * mysql_real_connect() function are declared as
  * global variables.
@@ -11,8 +12,8 @@
 
 
 #define SERVER "localhost"   /*hostname*/
-#define USER  "root"       /*username*/
-#define PASSWORD    "prabhakars 589b"         /*blank password this user*/
+#define USER  "root"     /*username*/
+#define PASSWORD    "prabhakars 589b"       /*blank password this user*/
 #define DATABASE "esb_db"   /*name of the database*/
 #define PORT  3306         /*port number*/
 #define UNIX_SOCKET NULL   /*unix socket*/
