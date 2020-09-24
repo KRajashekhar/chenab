@@ -285,7 +285,8 @@ if (mysql_stmt_execute(stmt)) {
 /*
 int main(int argc, char **argv) {
       char * attr [] = {"A","aaa","ass888a","asasa88","asas--asas","","","wewww",""};
-     esb_request(attr[0],attr[1],attr[2],attr[3],attr[4],attr[5],attr[6],attr[7],attr[8]);
+     insert_to_esb_request(attr[0],attr[1],attr[2],attr[3],attr[4],attr[5],attr[6],attr[7],attr[8]);
       return 0;
 } 
 */
+

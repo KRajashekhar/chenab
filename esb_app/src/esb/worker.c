@@ -14,6 +14,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include<mysql/mysql.h>
 /*
 #include "../db_access/select_task_info.c"
 #include "../db_access/update_esb_request.c"
@@ -54,6 +55,21 @@ task_node_info *  fetch_new_request_from_db()
  */
 void *poll_database_for_new_requests(void *vargp)
 {
+
+
+   //opening a db connection
+   
+   MYSQL * conn;
+   MYSQL_RES * res;
+   MYSQL_ROW row;
+   conn=mysql_init(NULL);
+   
+   //connect to database
+   if(!mysql_real_connect(conn,SERVER,USER,PASSWORD,DATABASE,0,NULL,0))
+   {
+   	printf("Failed to connect to MYSQL Server %s. Error : %s \n", SERVER ,mysql_error(conn));
+   }
+   
    printf("||------------------------------------------------||\n");
    printf("  starting thread  %s\n",(char *) vargp);
    printf("||------------------------------------------------||\n");
