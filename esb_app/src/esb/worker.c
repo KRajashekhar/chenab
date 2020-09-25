@@ -56,7 +56,7 @@ task_node_info *  fetch_new_request_from_db()
 void *poll_database_for_new_requests(void *vargp)
 {
 
-
+/*
    //opening a db connection
    
    MYSQL * conn;
@@ -69,6 +69,7 @@ void *poll_database_for_new_requests(void *vargp)
    {
    	printf("Failed to connect to MYSQL Server %s. Error : %s \n", SERVER ,mysql_error(conn));
    }
+   */
    
    printf("||------------------------------------------------||\n");
    printf("  starting thread  %s\n",(char *) vargp);
@@ -82,22 +83,27 @@ void *poll_database_for_new_requests(void *vargp)
         char * content;
         char * transform_file_name; 
         char * file_name;
+        bmd * bd1;
 
 
         pthread_mutex_lock(&lock);
         tn=fetch_new_request_from_db();
-        pthread_mutex_unlock(&lock);
+        if(tn==NULL)
+        {
+        	printf("NO REQUESTS AVAILABLE \n");
+        	pthread_mutex_unlock(&lock);
+        }
 
         
-        if (tn!=NULL)
+        else
         {
             
                printf("%d\n",tn->id);
               
-               if(update_esb_request("PROCESSING",tn->id) == -1){
-                    fprintf(stderr,"cannot update status in esb\n");
-                    return NULL;
-               }
+               update_esb_request("PROCESSING",tn->id);
+               pthread_mutex_unlock(&lock);
+                    
+        
 
                int id = active_routes_from_source(tn->sender,tn->destination,tn->message_type);
                printf("id is %d \n",id);
@@ -108,11 +114,14 @@ void *poll_database_for_new_requests(void *vargp)
                
                printf("data->location is %s\n ",tn->data_location);
 
-               bmd * bd1 = parse_bmd_xml(((char *)tn->data_location));
+                bd1 = parse_bmd_xml(((char *)tn->data_location));
 
                printf("%s\n%s\n-----\n%s\n%s\n",tf->config_key,tf->config_value,tp->config_key,tp->config_value);         
-               if((tp!=NULL) && ((strcmp(tf->config_value,"string"))==0))
-               {           
+               if(tp!=NULL)
+               {
+               	if(((strcmp(tf->config_value,"string"))==0))
+               	{
+               		           
                   content = call_function(tp->config_key,tp->config_value,bd1->payload);
                   printf("content is \n %s\n",content);
                   if((strcmp(content,"NO"))==0){
@@ -157,6 +166,7 @@ void *poll_database_for_new_requests(void *vargp)
 
                free(transform_file_name);
                }
+              }
 
             free_bmd(bd1);
             free_transform_config(tf);
